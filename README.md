@@ -1,0 +1,1 @@
+This is an example of an interview that will equip to tackle the “Minimum Operations” problem effectively, applying both mathematical reasoning and programming skills to find the most efficient solution.

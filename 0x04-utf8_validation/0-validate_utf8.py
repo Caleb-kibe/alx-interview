@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""UTF-8 validation"""
+
+
 def validUTF8(data):
     # Number of bytes in the current UTF-8 character
     n_bytes = 0
@@ -16,19 +20,19 @@ def validUTF8(data):
             while mask & byte:
                 n_bytes += 1
                 mask >>= 1
-            
+
             # 1 byte character
             if n_bytes == 0:
                 continue
 
-            # If the number of bytes is more than 4 or less than 2, return False
+            # return False if number of bytes is > 4 or < 2
             if n_bytes == 1 or n_bytes > 4:
                 return False
         else:
             # For n_bytes > 0, check if the byte starts with '10'
             if not (byte & mask1 and not (byte & mask2)):
                 return False
-        
+
         # Decrement the number of bytes to check
         n_bytes -= 1
 

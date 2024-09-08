@@ -1,0 +1,12 @@
+{
+  "name": "0x06-starwars_api",
+  "version": "1.0.0",
+  "description": "This project is a Node.js script that fetches and displays all characters from a specified Star Wars movie using the [Star Wars API (SWAPI)](https://swapi-api.alx-tools.com/).",
+  "main": "0-starwars_characters.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

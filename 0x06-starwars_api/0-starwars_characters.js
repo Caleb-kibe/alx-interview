@@ -1,3 +1,6 @@
+#!/usr/bin/node
+
+
 const axios = require('axios');
 
 // function that fetches characters of a movie by ID

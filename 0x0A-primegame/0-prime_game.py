@@ -3,38 +3,55 @@
 
 
 def isWinner(x, nums):
-    def sieve_of_eratosthenes(n):
-        primes = [True] * (n + 1)
-        primes[0] = primes[1] = False
-        for i in range(2, int(n**0.5) + 1):
-            if primes[i]:
-                for j in range(i*i, n + 1, i):
-                    primes[j] = False
-        return primes
+    """Function to get who has won in prime game"""
+    mariaWinsCount = 0
+    benWinsCount = 0
 
-    def simulate_game(n):
-        primes = sieve_of_eratosthenes(n)
-        steps = 0
-        for i in range(2, n + 1):
-            if primes[i]:
-                steps += 1
-        return steps % 2 == 1  # If odd, Maria wins; if even, Ben wins
+    for num in nums:
+        roundsSet = list(range(1, num + 1))
+        primesSet = primes_in_range(1, num)
 
-    if x <= 0 or not nums:
-        return None
+        if not primesSet:
+            benWinsCount += 1
+            continue
 
-    maria_wins = 0
-    ben_wins = 0
+        isMariaTurns = True
 
-    for n in nums:
-        if simulate_game(n):
-            maria_wins += 1
-        else:
-            ben_wins += 1
+        while(True):
+            if not primesSet:
+                if isMariaTurns:
+                    benWinsCount += 1
+                else:
+                    mariaWinsCount += 1
+                break
 
-    if maria_wins > ben_wins:
+            smallestPrime = primesSet.pop(0)
+            roundsSet.remove(smallestPrime)
+
+            roundsSet = [x for x in roundsSet if x % smallestPrime != 0]
+
+            isMariaTurns = not isMariaTurns
+
+    if mariaWinsCount > benWinsCount:
         return "Maria"
-    elif ben_wins > maria_wins:
+
+    if mariaWinsCount < benWinsCount:
         return "Ben"
-    else:
-        return None
+
+    return None
+
+
+def is_prime(n):
+    """Returns True if n is prime, else False."""
+    if n < 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+
+def primes_in_range(start, end):
+    """Returns a list of prime numbers between start and end (inclusive)."""
+    primes = [n for n in range(start, end+1) if is_prime(n)]
+    return primes
